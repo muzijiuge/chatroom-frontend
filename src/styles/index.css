@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900;
+    background-image: url('../assets/images/bg.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .auth-container {
+    @apply min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative;
+    &::before {
+      content: '';
+      @apply absolute inset-0 bg-gray-900/5 backdrop-blur-[2px];
+    }
+  }
+
+  .auth-box {
+    @apply relative bg-white/90 rounded-2xl shadow-2xl p-8 w-full max-w-md mx-auto;
+    @apply border border-white/20 backdrop-blur-sm;
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .logo-container {
+    @apply w-12 h-12 mx-auto mb-6 relative;
+    animation: logoFloat 6s ease-in-out infinite;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-medium transition-all duration-200 relative overflow-hidden text-sm;
+    &:before {
+      content: '';
+      @apply absolute inset-0 opacity-0 transition-opacity duration-200;
+      background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+    }
+    &:hover:before {
+      @apply opacity-100;
+    }
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark hover:shadow-lg transform active:scale-95;
+    @apply shadow-primary/20;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-dark;
+    @apply shadow-secondary/20;
+  }
+  
+  .input-group {
+    @apply relative mb-4;
+  }
+
+  .input {
+    @apply w-full h-11 px-3 py-2 border border-gray-300/50 rounded-lg bg-white/80
+           focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary
+           transition-all duration-200 text-sm backdrop-blur-sm;
+    @apply shadow-sm;
+  }
+
+  .input-icon-wrapper {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none;
+    @apply flex items-center justify-center;
+    width: 16px;
+    height: 16px;
+  }
+
+  .input-with-icon {
+    @apply pl-9;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+} 
