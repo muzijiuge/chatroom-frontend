@@ -4,12 +4,23 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900;
-    background-image: url('../assets/images/bg.svg');
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+    background-image: url("data:image/svg+xml,%3Csvg width='1440' height='1024' viewBox='0 0 1440 1024' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%234F46E5;stop-opacity:0.1'/%3E%3Cstop offset='100%25' style='stop-color:%237C3AED;stop-opacity:0.1'/%3E%3C/linearGradient%3E%3Cpattern id='pattern1' x='0' y='0' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='20' cy='20' r='1' fill='%234F46E5' fill-opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23grad1)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23pattern1)'/%3E%3Cpath d='M0,300 Q720,200 1440,300' stroke='%234F46E5' stroke-width='1' fill='none' opacity='0.1'/%3E%3Cpath d='M0,600 Q720,500 1440,600' stroke='%237C3AED' stroke-width='1' fill='none' opacity='0.1'/%3E%3Ccircle cx='200' cy='200' r='100' fill='%234F46E5' fill-opacity='0.05'/%3E%3Ccircle cx='1240' cy='800' r='150' fill='%237C3AED' fill-opacity='0.05'/%3E%3C/svg%3E");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+  }
+
+  /* 强制控制输入框内图标大小 */
+  .input-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
   }
 }
 
@@ -34,25 +45,43 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center px-4 py-2.5 rounded-lg font-medium transition-all duration-200 relative overflow-hidden text-sm;
+    @apply inline-flex items-center justify-center 
+           rounded-xl font-medium relative 
+           text-base leading-none
+           transition-all duration-200 
+           overflow-hidden select-none;
+
     &:before {
       content: '';
       @apply absolute inset-0 opacity-0 transition-opacity duration-200;
-      background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%);
+      background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.2) 100%);
     }
-    &:hover:before {
+
+    &:not(:disabled):hover:before {
       @apply opacity-100;
+    }
+
+    &:not(:disabled):active {
+      transform: translateY(1px) scale(0.99);
     }
   }
   
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-dark hover:shadow-lg transform active:scale-95;
-    @apply shadow-primary/20;
+    @apply bg-gradient-to-r from-primary to-primary-dark
+           text-white h-14 px-8
+           shadow-lg shadow-primary/25
+           hover:shadow-xl hover:shadow-primary/30
+           active:shadow-md
+           disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none;
   }
   
   .btn-secondary {
-    @apply bg-secondary text-white hover:bg-secondary-dark;
-    @apply shadow-secondary/20;
+    @apply bg-gradient-to-r from-secondary to-secondary-dark
+           text-white h-14 px-8
+           shadow-lg shadow-secondary/25
+           hover:shadow-xl hover:shadow-secondary/30
+           active:shadow-md
+           disabled:opacity-60 disabled:cursor-not-allowed disabled:shadow-none;
   }
   
   .input-group {
